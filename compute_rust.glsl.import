@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bnddj12bmi8hf"
+path="res://.godot/imported/compute_rust.glsl-e92a8b14f33924422a9644d0b648174b.res"
+
+[deps]
+
+source_file="res://compute_rust.glsl"
+dest_files=["res://.godot/imported/compute_rust.glsl-e92a8b14f33924422a9644d0b648174b.res"]
+
+[params]
+

@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://c605g7ob6jfd4"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_8gvlj"]
+[ext_resource type="Script" path="res://player.gd" id="1_okird"]
+[ext_resource type="Environment" uid="uid://boelgu735u20d" path="res://environment.tres" id="3_qdr7p"]
+[ext_resource type="Script" path="res://computescript.gd" id="4_cb8cv"]
+[ext_resource type="Script" path="res://CustomMesh3D.gd" id="5_2a75n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pbo7h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg48c"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.3
+metallic_specular = 0.59
+roughness = 0.5
+emission = Color(0.619608, 0.619608, 0.619608, 1)
+emission_energy_multiplier = 0.3
+rim_enabled = true
+rim_tint = 0.83
+clearcoat_enabled = true
+clearcoat = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_yk227"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxghr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahbqe"]
+albedo_color = Color(0.529412, 0.529412, 0.529412, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i8eh5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tv0pa"]
+
+[node name="Base" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 2.83964, 1.43445)
+current = true
+fov = 115.0
+script = ExtResource("1_8gvlj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.562574, 0.363796, -0.742403, 0, 0.897982, 0.440033, 0.826747, -0.247551, 0.505181, 0, 1.53551, 1.79906)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="Player" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pbo7h")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_wg48c")
+script = ExtResource("1_okird")
+
+[node name="Sword" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 1.5, 0, 0, 1.5)
+mesh = SubResource("BoxMesh_yk227")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+mesh = SubResource("BoxMesh_sxghr")
+skeleton = NodePath("../Player")
+surface_material_override/0 = SubResource("StandardMaterial3D_ahbqe")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_qdr7p")
+
+[node name="Computeshader" type="Node3D" parent="."]
+script = ExtResource("4_cb8cv")
+
+[node name="CustomMesh3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_i8eh5")
+script = ExtResource("5_2a75n")
+
+[node name="GdExt" type="GdExt" parent="."]
+mesh = SubResource("ArrayMesh_tv0pa")
