@@ -3,10 +3,11 @@ use godot::prelude::*;
 use godot::engine::*;
 use bytemuck::*;
 struct GdExtExt;
+struct GdCamExtExt;
 
 #[gdextension]
 unsafe impl ExtensionLibrary for GdExtExt{}
-
+unsafe impl ExtensionLibrary for GdCamExtExt{}
 
 const BLADES: u32 = 128 * 128 * 16;
 const VERTICES_PER_BLADE: u32 = 3;
@@ -24,6 +25,28 @@ struct VC3{
     x: f32,
     y: f32,
     z: f32
+}
+
+
+#[derive(GodotClass)]
+#[class(base=RenderSceneBuffersExtension)]
+struct GdCamExt
+{
+    #[base]
+    base: Base<RenderSceneBuffersExtension>,
+}
+#[godot_api]
+impl IRenderSceneBuffersExtension for GdCamExt
+{
+    fn init(base: Base<RenderSceneBuffersExtension>) -> Self
+    {
+        GdCamExt {base}
+    }
+
+    fn configure(&mut self, config: Gd<RenderSceneBuffersConfiguration>)
+    {
+        godot_print!("configure");
+    }
 }
 
 #[derive(GodotClass)]
@@ -117,6 +140,7 @@ impl IMeshInstance3D for GdExt
     }
     fn process(&mut self, delta: f64)
     {
+        /*
         //godot_print!("hello from process {}", delta);
         self.rd.submit();
         self.rd.sync();
@@ -167,6 +191,7 @@ impl IMeshInstance3D for GdExt
 
         //let packed5 = bytemuck::cast_slice::<u8, f32>(output_bytes0.as_slice());
         //godot_print!("output: {:?}", packed0);
+*/
 
         /*
         let output_bytes = self.rd.buffer_get_data(self.buffer0);

@@ -27,16 +27,16 @@ clearcoat = 0.3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahbqe"]
 albedo_color = Color(0.529412, 0.529412, 0.529412, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_i8eh5"]
+[sub_resource type="BoxMesh" id="BoxMesh_jhij4"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_tv0pa"]
+[sub_resource type="Texture2DRD" id="Texture2DRD_vumqt"]
 
 [node name="Base" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 2.83964, 1.43445)
 current = true
-fov = 115.0
+fov = 110.0
 script = ExtResource("1_8gvlj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -67,8 +67,10 @@ environment = ExtResource("3_qdr7p")
 script = ExtResource("4_cb8cv")
 
 [node name="CustomMesh3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("ArrayMesh_i8eh5")
+mesh = SubResource("BoxMesh_jhij4")
 script = ExtResource("5_2a75n")
 
-[node name="GdExt" type="GdExt" parent="."]
-mesh = SubResource("ArrayMesh_tv0pa")
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("Texture2DRD_vumqt")

@@ -11,3 +11,7 @@ func _ready():
 func _process(delta):
     global_position.x = player.position.x;
     global_position.z = player.position.z + 3;
+
+func _configure(config):
+    print("configgg")
+    pass
